@@ -7,24 +7,21 @@ class Libro:
 
     def mostrar_info(self):
         return f"Carnet: {self.codigo} - Nombre: {self.titulo} - Edad: {self.autor} - Anio: {self.anio}"
-class RegistroLibro:
+class RegistroLibros:
     def __init__(self):
         self.Libros = {}
     def agregar(self):
-        try:
-            codigoLibro = input("Ingresar el codigo del libro: ")
-            if codigoLibro in self.Libros:
-                print("Ya existe un libro con ese codigo.\n")
-                return
+        codigoLibro = input("Ingresar el codigo del libro: ")
+        if codigoLibro in self.Libros:
+            print("Ya existe un libro con ese codigo.\n")
+            return
 
-            titulo = input("Ingresar el titulo del autor: ")
-            autor= input("Ingrese el auntor del libro")
-            anio=int("Ingrese el anio de publicacion")
+        titulo = input("Ingresar el titulo del autor: ")
+        autor= input("Ingrese el auntor del libro")
+        anio=int(input("Ingrese el anio de publicacion"))
 
-            self.Libros[codigoLibro] = Libro(codigoLibro, titulo, autor,anio)
-            print("Libro agregado.\n")
-        except ValueError:
-            print("Error: el anio de publicacion debe ser un número entero.\n")
+        self.Libros[codigoLibro] = Libro(codigoLibro, titulo, autor,anio)
+        print("Libro agregado.\n")
 class Usuario:
     def __init__(self, codigo, nombre,carnet,carrera):
         self.codigo = codigo
@@ -38,7 +35,6 @@ class RegistroEstudiantes:
         self.usuarios = {}
 
     def agregar(self):
-        try:
             carnet = input("Ingresar carnet del estudiante: ")
             if carnet in self.usuarios:
                 print("Ya existe un estudiante con ese carnet.\n")
@@ -49,9 +45,9 @@ class RegistroEstudiantes:
 
             self.usuarios[carnet] = Usuario(carnet, nombre, carrera)
             print("Estudiante agregado.\n")
-        except ValueError:
-            print("Error: La edad debe ser un número entero.\n")
 
+registroLib = RegistroLibros()
+registroUs=RegistroEstudiantes()
 while True:
     print("Menu")
     print("1. Agregar Libros")
@@ -59,14 +55,14 @@ while True:
     print("3. Gestion de Prestamos")
     print("4. Salir")
     try:
-        opcion=int("Ingrese una opcion")
+        opcion=int(input("Ingrese una opcion"))
     except ValueError:
         print("Invalido, Ingrese un entero")
     match opcion:
         case 1:
-            pass
+            registroLib.agregar()
         case 2:
-            pass
+            registroUs.agregar()
         case 3:
             pass
         case 4:
